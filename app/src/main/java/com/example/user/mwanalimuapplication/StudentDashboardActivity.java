@@ -2,12 +2,17 @@ package com.example.user.mwanalimuapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,14 +22,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class StudentDashboardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, DashboardFragment.OnFragmentInteractionListener, MyClassmatesFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DashboardFragment.OnFragmentInteractionListener, MyClassmatesFragment.OnFragmentInteractionListener, MyAccountFragment.OnFragmentInteractionListener {
     SharedPreferences sharedPreferences;
+    AlertDialog alertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +48,9 @@ public class StudentDashboardActivity extends AppCompatActivity
 
         String name = sharedPreferences.getString("name", null);
         String email = sharedPreferences.getString("email", null);
+        String image = sharedPreferences.getString("image", null);
+
+
 
 //        TextView username = (TextView) findViewById(R.id.username);
 //        TextView user_email = (TextView) findViewById(R.id.user_emailaddress);
@@ -64,6 +79,9 @@ public class StudentDashboardActivity extends AppCompatActivity
 
         TextView username = (TextView) header.findViewById(R.id.username);
         TextView user_email = (TextView) header.findViewById(R.id.user_emailaddress);
+        final ImageView userIcon = (ImageView) header.findViewById(R.id.usericon);
+
+        new DownLoadImageTask(userIcon).execute(image);
 
         username.setText(name);
         user_email.setText(email);
@@ -83,6 +101,7 @@ public class StudentDashboardActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -141,6 +160,9 @@ public class StudentDashboardActivity extends AppCompatActivity
         } else if (id == R.id.nav_dashboard){
             fragmentClass = DashboardFragment.class;
         }
+        else if(id == R.id.nav_my_account){
+            fragmentClass = MyAccountFragment.class;
+        }
         else{
             fragmentClass = DashboardFragment.class;
         }
@@ -169,5 +191,41 @@ public class StudentDashboardActivity extends AppCompatActivity
     public void amsClicked(View v){
         Intent amsIntent = new Intent(this, AMSActivity.class);
         startActivity(amsIntent);
+    }
+
+    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+        ImageView imageView;
+
+        public DownLoadImageTask(ImageView imageView){
+            this.imageView = imageView;
+        }
+
+        /*
+            doInBackground(Params... params)
+                Override this method to perform a computation on a background thread.
+         */
+        protected Bitmap doInBackground(String...urls){
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try{
+                InputStream is = new URL(urlOfImage).openStream();
+                /*
+                    decodeStream(InputStream is)
+                        Decode an input stream into a bitmap.
+                 */
+                logo = BitmapFactory.decodeStream(is);
+            }catch(Exception e){ // Catch the download exception
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        /*
+            onPostExecute(Result result)
+                Runs on the UI thread after doInBackground(Params...).
+         */
+        protected void onPostExecute(Bitmap result){
+            imageView.setImageBitmap(result);
+        }
     }
 }

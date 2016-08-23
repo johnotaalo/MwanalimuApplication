@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -112,6 +114,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 int student_id = userDetails.getInt("student_id");
                 String name = userDetails.getString("name");
                 String email = userDetails.getString("email");
+                String image = userDetails.getString("photo");
 
                 sharedpreferences = this.context.getSharedPreferences(MyPREFERENCES, this.context.MODE_PRIVATE);
 
@@ -120,6 +123,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 editor.putInt("ID", student_id);
                 editor.putString("name", name);
                 editor.putString("email", email);
+                editor.putString("image", image);
 
                 editor.commit();
 
@@ -142,5 +146,27 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            Log.e("src",src);
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            Log.e("Bitmap","returned");
+            return myBitmap;
+        } catch (IOException e) {
+            Log.e("Exception",e.getMessage());
+            android.support.v7.app.AlertDialog alertDialog = null;
+            alertDialog.setTitle("Error");
+            alertDialog.setMessage(e.getMessage());
+
+
+            return null;
+        }
     }
 }
