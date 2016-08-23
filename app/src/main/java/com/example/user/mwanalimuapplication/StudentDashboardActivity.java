@@ -37,11 +37,11 @@ public class StudentDashboardActivity extends AppCompatActivity
         String name = sharedPreferences.getString("name", null);
         String email = sharedPreferences.getString("email", null);
 
-        TextView username = (TextView) findViewById(R.id.username);
-        TextView user_email = (TextView) findViewById(R.id.user_emailaddress);
-
-        username.setText(name);
-        user_email.setText(email);
+//        TextView username = (TextView) findViewById(R.id.username);
+//        TextView user_email = (TextView) findViewById(R.id.user_emailaddress);
+//
+//        username.setText(name);
+//        user_email.setText(email);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +60,14 @@ public class StudentDashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_dashboard);
+        View header=navigationView.getHeaderView(0);
+
+        TextView username = (TextView) header.findViewById(R.id.username);
+        TextView user_email = (TextView) header.findViewById(R.id.user_emailaddress);
+
+        username.setText(name);
+        user_email.setText(email);
+
 //        MenuItem selected_item = navigationView.getMenu().getItem(R.id.nav_dashboard);
 //        CharSequence selected_item_title = selected_item.getTitle();
 //        setTitle(selected_item_title);
