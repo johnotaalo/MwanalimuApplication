@@ -1,0 +1,160 @@
+<?xml  version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:background="#424242">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todays_date"
+                android:textColor="@color/light_grey"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:background="#123">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:text="Welcome to the system"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:stretchColumns="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:background="@color/background1"
+                    android:layout_height="fill_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/amsButton"
+                        android:src="@drawable/ic_school_white_48dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:onClick="amsClicked"/>
+
+                    <TextView
+                        android:text="@string/ams_title"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
+                        android:layout_below="@+id/amsButton"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="#fff"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:background="@color/background2"
+                    android:layout_height="fill_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/categoria_image_2"
+                        android:src="@drawable/ic_library_books_white_48dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:text="@string/elearning_title"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
+                        android:layout_below="@+id/categoria_image_2"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="#fff"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_height="0dp"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:background="@color/background3"
+                    android:layout_height="fill_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/myClassMatesButton"
+                        android:src="@drawable/ic_people_white_48dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:text="@string/myclassmatestitle"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
+                        android:layout_below="@+id/myClassMatesButton"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="#fff"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:background="@color/background4"
+                    android:layout_height="fill_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/messagesButton"
+                        android:src="@drawable/ic_library_books_white_48dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:text="@string/messagesTitle"
+                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
+                        android:layout_below="@+id/messagesButton"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textColor="#fff"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ams_title">Student AMS</string>
+    <string name="elearning_title">ELearning Portal</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="new_message_activity">New Message</string>
+    <string name="messagesTitle">Messages</string>
+    <string name="myclassmatestitle">My Classmates</string>
+</resources>
